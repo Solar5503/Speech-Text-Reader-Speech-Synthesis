@@ -48,6 +48,10 @@ select:focus {
   padding: 20px;
   border-radius: 5px;
   transition: all 1s ease-in-out;
+  z-index: 99;
+}
+.text-box.show {
+  transform: translate(-50%, 0);
 }
 .text-box select {
   background-color: darksalmon;
