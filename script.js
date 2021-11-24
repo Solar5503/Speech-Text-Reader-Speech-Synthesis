@@ -52,7 +52,7 @@ const data = [
   },
   {
     image: './img/grandma.jpg',
-    text: 'I Want To Go To Grandmas',
+    text: 'I Want To Go To Grandma',
   },
 ];
 
@@ -82,6 +82,8 @@ function createBox(item) {
 
 //Init speech synth
 const message = new SpeechSynthesisUtterance();
+//Correction of pronunciation in English
+message.lang = 'en-US';
 
 //Store voices
 let voices = [];
@@ -106,6 +108,11 @@ function speakText() {
   speechSynthesis.speak(message);
 }
 
+//Set voice
+function setVoice(e) {
+  message.voice = voices.find((voice) => voice.name === e.target.value);
+}
+
 //Voices changed
 speechSynthesis.addEventListener('voiceschanged', getVoices);
 
@@ -118,5 +125,14 @@ toggleBtn.addEventListener('click', () =>
 closeBtn.addEventListener('click', () =>
   document.getElementById('text-box').classList.remove('show')
 );
+
+//Change voice
+voicesSelect.addEventListener('change', setVoice);
+
+//Read text button
+readBtn.addEventListener('click', () => {
+  setTextMessage(textArea.value);
+  speakText();
+});
 
 getVoices();
